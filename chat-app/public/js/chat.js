@@ -38,7 +38,7 @@ const autoscroll = () => {
 socket.on("message", (message) => {
   console.log(message);
 
-  const sound = new Audio('../img/second.wav');
+  const sound = new Audio('../img/apple.mp3');
   sound.play();
 
   const html = Mustache.render(messageTemplate, {
