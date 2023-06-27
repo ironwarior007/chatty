@@ -4,6 +4,20 @@
     <title>Chat App</title>
     <link rel="icon" href="/img/favicon.png" />
     <link rel="stylesheet" href="/css/styles.min.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://unpkg.com/emojimart@3.0.2/css/emojimart.css"
+    />
+    <style>
+      emoji-picker {
+        width: 400px;
+        height: 300px;
+      }
+      .tooltip:not(.shown) {
+        display: none;
+      }
+    </style>
   </head>
   <body>
     <div class="chat">
@@ -13,13 +27,25 @@
 
         <div class="compose">
           <form id="message-form">
-            <input name="message" placeholder="Message" required />
+            <input
+              name="message"
+              placeholder="Message"
+              id="Message_console"
+              required
+            />
             <button>Send</button>
           </form>
+          <button id="emoji">emoji</button>
           <button id="send-location">Send location</button>
+          <div class="tooltip" role="tooltip">
+            <emoji-picker></emoji-picker>
+          </div>
         </div>
       </div>
     </div>
+
+    <!-- <input type="text" id="emoji-input" />
+    <div id="emoji-picker"></div> -->
 
     <script id="message-template" type="text/html">
       <div class="message">
@@ -81,9 +107,38 @@
     </script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.0.1/mustache.min.js"></script>
+    <script src="https://unpkg.com/emojimart@3.0.2/js/emojimart.min.js"></script>
+    <script type="module">
+      import * as Popper from 'https://cdn.jsdelivr.net/npm/@popperjs/core@^2/dist/esm/index.js';
+      const button = document.querySelector('#emoji');
+      const tooltip = document.querySelector('.tooltip');
+      Popper.createPopper(button, tooltip);
+
+      document.querySelector('#emoji').onclick = () => {
+        tooltip.classList.toggle('shown');
+      };
+    </script>
+    <script type="module">
+      import 'https://cdn.jsdelivr.net/npm/emoji-picker-element@^1/index.js';
+      import insertText from 'https://cdn.jsdelivr.net/npm/insert-text-at-cursor@0.3.0/index.js';
+
+      document
+        .querySelector('emoji-picker')
+        .addEventListener('emoji-click', (e) => {
+          insertText(
+            document.querySelector('#Message_console'),
+            e.detail.unicode
+          );
+        });
+    </script>
+    <script
+      type="module"
+      src="https://cdn.jsdelivr.net/npm/emoji-picker-element@^1/index.js"
+    ></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.6.0/qs.min.js"></script>
     <script src="/socket.io/socket.io.js"></script>
+    <script src="/public/js/script.js"></script>
     <script src="/js/chat.js"></script>
     <script src="/js/timer.js"></script>
   </body>
