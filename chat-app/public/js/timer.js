@@ -23,18 +23,32 @@ function formatTime(hours, minutes) {
   return `${formattedHour}:${formattedMinute}`;
 }
 
-function submitForm() {
-  var field1Value = document.getElementById('field1').value;
-  var field2Value = document.getElementById('field2').value;
-  var field3Value = document.getElementById('field3').value;
+function validateTime(timeString) {
+  // Regular expression to match 12-hour time format
+  var regex = /^(0?[1-9]|1[0-2]):[0-5][0-9]$/;
+
+  return regex.test(timeString);
+}
+
+function submitForm(
+  userName,
+  punchinTime,
+  punchOutBeforeLunchofoffie,
+  punchinLunchAfter
+) {
+    
+  var field1Value = validateTime(punchinTime);;
+  var field2Value = validateTime(punchOutBeforeLunchofoffie);
+  var field3Value = validateTime(punchinLunchAfter);
+  if(!field1Value || !field2Value || !field3Value) throw new Error('getting error');
   
-  const punchinBeforeLunchStr = `${field1Value} AM`;
+  const punchinBeforeLunchStr = `${punchinTime} AM`;
   const punchinBeforeLunch = getFormattedTime(punchinBeforeLunchStr);
-
-  const punchoutBeforeLunchStr = `${field2Value} PM`;
+  
+  const punchoutBeforeLunchStr = `${punchOutBeforeLunchofoffie} PM`;
   const punchoutBeforeLunch = getFormattedTime(punchoutBeforeLunchStr);
-
-  const punchinAfterLunchStr = `${field3Value} PM`;
+  
+  const punchinAfterLunchStr = `${punchinLunchAfter} PM`;
   const punchinAfterLunch = getFormattedTime(punchinAfterLunchStr);
 
   const currentTime = getCurrentTime();
@@ -75,17 +89,14 @@ function submitForm() {
       minute: 'numeric',
       hour12: true,
     });
-    
-    responseMessage = `You can go on this time ${futureTimeStr}`
-    var timerResultElement = document.getElementById('timer-result');
-    timerResultElement.textContent = responseMessage;
-    console.log(responseMessage);
-    
 
+    return `Hey ${userName} You can go on this time ${futureTimeStr}`;
+    // var timerResultElement = document.getElementById('timer-result');
+    // timerResultElement.textContent = responseMessage;
+    // console.log(responseMessage);
   } else {
-    responseMessage = 'You have already completed 8.5 hours of work for today.';
-    var timerResultElement = document.getElementById('timer-result');
-    timerResultElement.textContent = responseMessage;
-
+    return `Hey ${userName} You have already completed 8.5 hours of work for today.`;
+    // var timerResultElement = document.getElementById('timer-result');
+    // timerResultElement.textContent = responseMessage;
   }
 }
