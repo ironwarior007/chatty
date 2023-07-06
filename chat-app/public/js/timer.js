@@ -76,7 +76,7 @@ function submitForm() {
       hour12: true,
     });
     
-    responseMessage = `I don't know this time ${futureTimeStr}`
+    responseMessage = `You can go on this time ${futureTimeStr}`
     var timerResultElement = document.getElementById('timer-result');
     timerResultElement.textContent = responseMessage;
     console.log(responseMessage);
