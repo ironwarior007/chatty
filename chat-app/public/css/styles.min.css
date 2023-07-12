@@ -189,6 +189,7 @@ button:disabled {
 
 .header_temp span{
   display: flex;
-  align-items:center ;
+  align-items:center;
+  cursor:pointer;
  
 }
