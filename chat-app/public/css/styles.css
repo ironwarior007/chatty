@@ -1,5 +1,4 @@
 /* General Styles */
-
 * {
   margin: 0;
   padding: 0;
@@ -16,7 +15,9 @@ input {
 
 body {
   line-height: 1.4;
-  color: #333333;
+  background-color: #736b5e;
+  color: #e8e6e3;
+  /* color: #333333; */
   font-family: Helvetica, Arial, sans-serif;
 }
 
@@ -61,7 +62,7 @@ button:disabled {
 /* Join Page Styles */
 
 .centered-form {
-  background: #333744;
+  background-color: #202324;
   width: 100vw;
   height: 100vh;
   display: flex;
@@ -94,6 +95,8 @@ button:disabled {
 .chat__sidebar {
   height: 100vh;
   color: white;
+  background-image: initial;
+  background-color: rgb(41, 44, 54);
   background: #333744;
   width: 225px;
   overflow-y: scroll;
@@ -183,3 +186,17 @@ button:disabled {
   font-weight: 300;
   padding: 12px 24px 0 24px;
 }
+
+.compose{
+  div{
+    display: flex;
+    border: 1px solid black;
+    width: 100%;
+  }
+  span{
+    display: flex;
+    align-items: center;
+    padding-right: 10px
+  }
+}
+
