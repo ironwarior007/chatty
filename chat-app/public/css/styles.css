@@ -196,7 +196,8 @@ button:disabled {
   span{
     display: flex;
     align-items: center;
-    padding-right: 10px
+    padding-right: 10px;
+    cursor:pointer
   }
 }
 
